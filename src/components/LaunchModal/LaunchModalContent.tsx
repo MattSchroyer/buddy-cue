@@ -16,7 +16,7 @@ const LaunchModalContentContainer = styled.div`
   border-radius: 4px;
 `;
 
-const LaunchModalHeader = styled.h1`
+const LaunchModalHeader = styled.div`
   font-size: 24px;
   padding-bottom: 8px;
 `;
@@ -74,7 +74,10 @@ const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
   return (
     <LaunchModalContentContainer>
       <LaunchModalHeader>
-        Welcome! Please select a starting time and temp (in ºF).
+        <h1>Welcome to Buddy Cue!</h1>
+        <div>
+          Please select a starting time, temp (in ºF), and weight (in lbs).
+        </div>
       </LaunchModalHeader>
       <LaunchModalInput>
         <TimeInputContainer>
@@ -88,8 +91,16 @@ const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
             onChange={(e) => onTempInputChange(e)}
           />
         </div>
+        <div style={{ padding: "8px" }}>
+          <TextField
+            id="weight-input"
+            label="Weight"
+            variant="outlined"
+            onChange={(e) => onTempInputChange(e)}
+          />
+        </div>
       </LaunchModalInput>
-      <div>
+      <div style={{ padding: "8px 0 8px 0" }}>
         <Button
           variant="contained"
           color="primary"

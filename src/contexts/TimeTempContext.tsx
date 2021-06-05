@@ -11,6 +11,8 @@ export type TimeTempContextType = {
   timeTempCache: TimeTempType[];
   addTimeTemp: (newTimeTemp: TimeTempType) => void;
   dateArr: Date[];
+  setWeight: (newWeight: number) => void;
+  weight: number;
 };
 
 interface TimeTempProviderType {
@@ -21,6 +23,8 @@ export const TimeTempContext = React.createContext<TimeTempContextType>({
   timeTempCache: [],
   addTimeTemp: () => undefined,
   dateArr: [],
+  setWeight: () => undefined,
+  weight: 0,
 });
 
 export function TimeTempProvider({
@@ -29,6 +33,8 @@ export function TimeTempProvider({
   const [timeTempCache, setTimeTempCache] = useState<TimeTempType[]>([]);
   const startDate = new Date();
   startDate.setHours(6, 0, 0, 0);
+
+  const [weight, setWeight] = useState(0);
 
   const dateArr = Array.from(Array(29), (x, i) => {
     const thisDate = new Date(startDate);
@@ -41,7 +47,9 @@ export function TimeTempProvider({
   };
 
   return (
-    <TimeTempContext.Provider value={{ timeTempCache, addTimeTemp, dateArr }}>
+    <TimeTempContext.Provider
+      value={{ timeTempCache, addTimeTemp, dateArr, weight, setWeight }}
+    >
       {children}
     </TimeTempContext.Provider>
   );
