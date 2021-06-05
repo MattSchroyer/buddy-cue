@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import TimeSelect from "./TimeSelect";
 import { useTimeTempContext } from "../../contexts/TimeTempContext";
 
-const LaunchModalContentContainer = styled.div`
+const InitEntryContentContainer = styled.div`
   position: absolute;
   width: 400px;
   background-color: #ffffff;
@@ -16,7 +16,7 @@ const LaunchModalContentContainer = styled.div`
   border-radius: 4px;
 `;
 
-const LaunchModalHeader = styled.h1`
+const LaunchModalHeader = styled.div`
   font-size: 24px;
   padding-bottom: 8px;
 `;
@@ -44,18 +44,18 @@ export type OnTimeInputChangeType = {
   name?: string | undefined;
 };
 
-export type LaunchModalContentType = {
+export type InitEntryContentType = {
   onSubmit: () => void;
 };
 
-const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
-  const { timeTempCache, addTimeTemp } = useTimeTempContext();
+const InitEntryContent: React.FC<InitEntryContentType> = ({ onSubmit }) => {
+  const { timeTempCache, addTimeTemp, setWeight } = useTimeTempContext();
   const startDate = new Date();
   startDate.setHours(6, 0, 0, 0);
   const [timeIndex, setTimeIndex] = useState<number>(0);
   const [time, setTime] = useState<Date>(startDate);
   const [temp, setTemp] = useState<number>(0);
-
+  const [thisWeight, setThisWeight] = useState<number>(0);
   const onTimeInputChange = (index: number, thisTime: Date) => {
     setTimeIndex(index);
     setTime(thisTime);
@@ -63,18 +63,25 @@ const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
   const onTempInputChange = (e: OnChangeEventType) => {
     setTemp(parseInt(e.target.value, 10));
   };
+  const onWeightInputChange = (e: OnChangeEventType) => {
+    setThisWeight(parseInt(e.target.value, 10));
+  };
   const onTempButtonClick = () => {
     const tempDiff = timeTempCache.length
       ? temp - timeTempCache[timeTempCache.length - 1].temp
       : 0;
     addTimeTemp({ timeIndex, temp, time, tempDiff });
+    setWeight(thisWeight);
     onSubmit();
   };
 
   return (
-    <LaunchModalContentContainer>
+    <InitEntryContentContainer>
       <LaunchModalHeader>
-        Welcome! Please select a starting time and temp (in ºF).
+        <h1>Welcome to Buddy Cue!</h1>
+        <div>
+          Please select a starting time, temp (in ºF), and weight (in lbs).
+        </div>
       </LaunchModalHeader>
       <LaunchModalInput>
         <TimeInputContainer>
@@ -88,8 +95,16 @@ const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
             onChange={(e) => onTempInputChange(e)}
           />
         </div>
+        <div style={{ padding: "8px" }}>
+          <TextField
+            id="weight-input"
+            label="Weight"
+            variant="outlined"
+            onChange={(e) => onWeightInputChange(e)}
+          />
+        </div>
       </LaunchModalInput>
-      <div>
+      <div style={{ padding: "8px 0 8px 0" }}>
         <Button
           variant="contained"
           color="primary"
@@ -98,8 +113,8 @@ const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
           Enter
         </Button>
       </div>
-    </LaunchModalContentContainer>
+    </InitEntryContentContainer>
   );
 };
 
-export default LaunchModalContent;
+export default InitEntryContent;
