@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import TimeSelect from "./TimeSelect";
 import { useTimeTempContext } from "../../contexts/TimeTempContext";
 
-const LaunchModalContentContainer = styled.div`
+const InitEntryContentContainer = styled.div`
   position: absolute;
   width: 400px;
   background-color: #ffffff;
@@ -44,18 +44,18 @@ export type OnTimeInputChangeType = {
   name?: string | undefined;
 };
 
-export type LaunchModalContentType = {
+export type InitEntryContentType = {
   onSubmit: () => void;
 };
 
-const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
-  const { timeTempCache, addTimeTemp } = useTimeTempContext();
+const InitEntryContent: React.FC<InitEntryContentType> = ({ onSubmit }) => {
+  const { timeTempCache, addTimeTemp, setWeight } = useTimeTempContext();
   const startDate = new Date();
   startDate.setHours(6, 0, 0, 0);
   const [timeIndex, setTimeIndex] = useState<number>(0);
   const [time, setTime] = useState<Date>(startDate);
   const [temp, setTemp] = useState<number>(0);
-
+  const [thisWeight, setThisWeight] = useState<number>(0);
   const onTimeInputChange = (index: number, thisTime: Date) => {
     setTimeIndex(index);
     setTime(thisTime);
@@ -63,16 +63,20 @@ const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
   const onTempInputChange = (e: OnChangeEventType) => {
     setTemp(parseInt(e.target.value, 10));
   };
+  const onWeightInputChange = (e: OnChangeEventType) => {
+    setThisWeight(parseInt(e.target.value, 10));
+  };
   const onTempButtonClick = () => {
     const tempDiff = timeTempCache.length
       ? temp - timeTempCache[timeTempCache.length - 1].temp
       : 0;
     addTimeTemp({ timeIndex, temp, time, tempDiff });
+    setWeight(thisWeight);
     onSubmit();
   };
 
   return (
-    <LaunchModalContentContainer>
+    <InitEntryContentContainer>
       <LaunchModalHeader>
         <h1>Welcome to Buddy Cue!</h1>
         <div>
@@ -96,7 +100,7 @@ const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
             id="weight-input"
             label="Weight"
             variant="outlined"
-            onChange={(e) => onTempInputChange(e)}
+            onChange={(e) => onWeightInputChange(e)}
           />
         </div>
       </LaunchModalInput>
@@ -109,8 +113,8 @@ const LaunchModalContent: React.FC<LaunchModalContentType> = ({ onSubmit }) => {
           Enter
         </Button>
       </div>
-    </LaunchModalContentContainer>
+    </InitEntryContentContainer>
   );
 };
 
-export default LaunchModalContent;
+export default InitEntryContent;

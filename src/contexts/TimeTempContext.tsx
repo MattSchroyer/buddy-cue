@@ -34,7 +34,7 @@ export function TimeTempProvider({
   const startDate = new Date();
   startDate.setHours(6, 0, 0, 0);
 
-  const [weight, setWeight] = useState(0);
+  const [weight, setWeight] = useState<number>(0);
 
   const dateArr = Array.from(Array(29), (x, i) => {
     const thisDate = new Date(startDate);
