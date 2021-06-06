@@ -40,7 +40,16 @@ const TimeTempEntry: React.FC = () => {
     const tempDiff = timeTempCache.length
       ? temp - timeTempCache[timeTempCache.length - 1].temp
       : 0;
-    addTimeTemp({ timeIndex: nextTimeIndex, temp, time: nextTime, tempDiff });
+    const formattedTime = nextTime
+      .toLocaleTimeString()
+      .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+    addTimeTemp({
+      timeIndex: nextTimeIndex,
+      temp,
+      time: nextTime,
+      formattedTime,
+      tempDiff,
+    });
   };
 
   return (
