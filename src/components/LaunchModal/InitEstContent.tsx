@@ -1,7 +1,10 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import styled from "@emotion/styled";
-import { useTimeTempContext } from "../../contexts/TimeTempContext";
+import {
+  useTimeTempContext,
+  HOURS_PER_LB,
+} from "../../contexts/TimeTempContext";
 
 const InitEstContentContainer = styled.div`
   position: absolute;
@@ -21,7 +24,7 @@ export type InitEntryContentType = {
 
 const InitEstContent: React.FC<InitEntryContentType> = ({ onClose }) => {
   const { weight } = useTimeTempContext();
-  const estTime = weight * 2;
+  const estTime = weight * HOURS_PER_LB;
   return (
     <InitEstContentContainer>
       <div style={{ padding: "8px 0 8px 0" }}>

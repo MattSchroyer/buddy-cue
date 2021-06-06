@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
 
+export const GOAL_INT_TEMP = 205;
+export const HOURS_PER_LB = 2;
+
 export type TimeTempType = {
   timeIndex: number;
   time: Date;
@@ -14,6 +17,8 @@ export type TimeTempContextType = {
   dateArr: Date[];
   setWeight: (newWeight: number) => void;
   weight: number;
+  isWarningOpen: boolean;
+  setIsWarningOpen: (isOpen: boolean) => void;
 };
 
 interface TimeTempProviderType {
@@ -26,12 +31,15 @@ export const TimeTempContext = React.createContext<TimeTempContextType>({
   dateArr: [],
   setWeight: () => undefined,
   weight: 0,
+  isWarningOpen: false,
+  setIsWarningOpen: () => undefined,
 });
 
 export function TimeTempProvider({
   children,
 }: TimeTempProviderType): JSX.Element {
   const [timeTempCache, setTimeTempCache] = useState<TimeTempType[]>([]);
+  const [isWarningOpen, setIsWarningOpen] = useState<boolean>(false);
   const startDate = new Date();
   startDate.setHours(6, 0, 0, 0);
 
@@ -43,13 +51,31 @@ export function TimeTempProvider({
     return thisDate;
   });
 
+  const checkTempWarning = () => {
+    const initTemp = timeTempCache[0].temp;
+    const lastTimeTempEntry = timeTempCache.slice(-1).pop();
+    const lastTemp = lastTimeTempEntry ? lastTimeTempEntry.temp : 0;
+    const avgTempInc = lastTemp - initTemp;
+    const reqAvgTempInc = (GOAL_INT_TEMP - initTemp) / (weight * HOURS_PER_LB);
+    if (avgTempInc < reqAvgTempInc) setIsWarningOpen(true);
+  };
+
   const addTimeTemp = (newTimeTemp: TimeTempType) => {
     setTimeTempCache((prevState) => [...prevState, newTimeTemp]);
+    if (timeTempCache.length) checkTempWarning();
   };
 
   return (
     <TimeTempContext.Provider
-      value={{ timeTempCache, addTimeTemp, dateArr, weight, setWeight }}
+      value={{
+        timeTempCache,
+        addTimeTemp,
+        dateArr,
+        weight,
+        setWeight,
+        isWarningOpen,
+        setIsWarningOpen,
+      }}
     >
       {children}
     </TimeTempContext.Provider>
