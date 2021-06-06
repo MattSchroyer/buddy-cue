@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 export type TimeTempType = {
   timeIndex: number;
   time: Date;
+  formattedTime: string;
   temp: number;
   tempDiff: number;
 };

@@ -14,10 +14,7 @@ const TimeTempTable: React.FC = () => {
   const TempRows =
     timeTempCache &&
     timeTempCache.map((thisTimeTemp) => {
-      const { timeIndex, time, temp, tempDiff } = thisTimeTemp;
-      const formattedTime = time
-        .toLocaleTimeString()
-        .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+      const { timeIndex, formattedTime, temp, tempDiff } = thisTimeTemp;
       return (
         <TableRow key={timeIndex}>
           <TableCell>{formattedTime}</TableCell>

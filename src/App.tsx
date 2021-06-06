@@ -3,6 +3,7 @@ import { TimeTempProvider } from "./contexts/TimeTempContext";
 import TimeTempEntry from "./components/Main/TimeTempEntry";
 import TimeTempTable from "./components/Main/TimeTempTable";
 import LaunchModal from "./components/LaunchModal/LaunchModal";
+import TimeTempChart from "./components/Main/TimeTempChart";
 
 const App: React.FC = () => {
   return (
@@ -10,6 +11,9 @@ const App: React.FC = () => {
       <LaunchModal />
       <div style={{ padding: "12px" }}>
         <TimeTempEntry />
+      </div>
+      <div style={{ padding: "12px" }}>
+        <TimeTempChart />
       </div>
       <div style={{ padding: "12px" }}>
         <TimeTempTable />

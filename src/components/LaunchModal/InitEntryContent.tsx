@@ -70,7 +70,10 @@ const InitEntryContent: React.FC<InitEntryContentType> = ({ onSubmit }) => {
     const tempDiff = timeTempCache.length
       ? temp - timeTempCache[timeTempCache.length - 1].temp
       : 0;
-    addTimeTemp({ timeIndex, temp, time, tempDiff });
+    const formattedTime = time
+      .toLocaleTimeString()
+      .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+    addTimeTemp({ timeIndex, temp, time, formattedTime, tempDiff });
     setWeight(thisWeight);
     onSubmit();
   };
