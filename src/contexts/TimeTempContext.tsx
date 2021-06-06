@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 export const GOAL_INT_TEMP = 205;
-export const HOURS_PER_LB = 1.5;
+export const HOURS_PER_LB = 2;
 
 export type TimeTempType = {
   timeIndex: number;
