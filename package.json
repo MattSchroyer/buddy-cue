@@ -1,6 +1,7 @@
 {
   "name": "buddy-cue",
-  "version": "0.1.4",
+  "version": "0.1.5",
+  "homepage": "https://mattschroyer.github.io/buddy-cue/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.1.5",
@@ -24,6 +25,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -50,6 +53,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
-    "eslint": "^7.24.0"
+    "eslint": "^7.24.0",
+    "gh-pages": "^3.2.0"
   }
 }
