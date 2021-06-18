@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/buddy-cue/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/buddy-cue/static/js/main.f5b3dc02.chunk.js",
-    "main.js.map": "/buddy-cue/static/js/main.f5b3dc02.chunk.js.map",
+    "main.js": "/buddy-cue/static/js/main.b93cf2d1.chunk.js",
+    "main.js.map": "/buddy-cue/static/js/main.b93cf2d1.chunk.js.map",
     "runtime-main.js": "/buddy-cue/static/js/runtime-main.b53aa10a.js",
     "runtime-main.js.map": "/buddy-cue/static/js/runtime-main.b53aa10a.js.map",
-    "static/js/2.ee6c9094.chunk.js": "/buddy-cue/static/js/2.ee6c9094.chunk.js",
-    "static/js/2.ee6c9094.chunk.js.map": "/buddy-cue/static/js/2.ee6c9094.chunk.js.map",
+    "static/js/2.18c95659.chunk.js": "/buddy-cue/static/js/2.18c95659.chunk.js",
+    "static/js/2.18c95659.chunk.js.map": "/buddy-cue/static/js/2.18c95659.chunk.js.map",
     "index.html": "/buddy-cue/index.html",
     "static/css/main.6dea0f05.chunk.css.map": "/buddy-cue/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.ee6c9094.chunk.js.LICENSE.txt": "/buddy-cue/static/js/2.ee6c9094.chunk.js.LICENSE.txt"
+    "static/js/2.18c95659.chunk.js.LICENSE.txt": "/buddy-cue/static/js/2.18c95659.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b53aa10a.js",
-    "static/js/2.ee6c9094.chunk.js",
+    "static/js/2.18c95659.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.f5b3dc02.chunk.js"
+    "static/js/main.b93cf2d1.chunk.js"
   ]
 }
