@@ -9,6 +9,7 @@ export type TimeTempType = {
   formattedTime: string;
   temp: number;
   tempDiff: number;
+  addedCoals: boolean;
 };
 
 export type TimeTempContextType = {
