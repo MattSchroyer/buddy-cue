@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { Button, TextField } from "@material-ui/core";
+import { Button, MenuItem, Select, TextField } from "@material-ui/core";
 import { useTimeTempContext } from "../../contexts/TimeTempContext";
+
+export type OnCoalsChangeType = React.ChangeEvent<{
+  name?: string | undefined;
+  value: unknown;
+}>;
 
 const TimeTempEntryContent = styled.div`
   display: flex;
@@ -24,6 +29,7 @@ const TimeTempEntry: React.FC = () => {
   const startDate = new Date();
   startDate.setHours(6, 0, 0, 0);
   const [temp, setTemp] = useState<number>(0);
+  const [coals, setCoals] = useState<number>(0);
 
   const nextTimeIndex = timeTempCache.length
     ? timeTempCache[timeTempCache.length - 1].timeIndex + 1
@@ -49,7 +55,12 @@ const TimeTempEntry: React.FC = () => {
       time: nextTime,
       formattedTime,
       tempDiff,
+      addedCoals: !!coals,
     });
+  };
+
+  const onCoalsChange = (e: OnCoalsChangeType) => {
+    setCoals(e.target.value as number);
   };
 
   return (
@@ -72,6 +83,17 @@ const TimeTempEntry: React.FC = () => {
         >
           Enter Temp
         </Button>
+      </div>
+      <div style={{ padding: "12px" }}>
+        <Select
+          labelId="add-coals-select"
+          id="add-coals-select"
+          onChange={(e) => onCoalsChange(e)}
+          value={coals}
+        >
+          <MenuItem value={0}>No</MenuItem>
+          <MenuItem value={1}>Yes</MenuItem>
+        </Select>
       </div>
     </TimeTempEntryContent>
   );

@@ -14,12 +14,14 @@ const TimeTempTable: React.FC = () => {
   const TempRows =
     timeTempCache &&
     timeTempCache.map((thisTimeTemp) => {
-      const { timeIndex, formattedTime, temp, tempDiff } = thisTimeTemp;
+      const { timeIndex, formattedTime, temp, tempDiff, addedCoals } =
+        thisTimeTemp;
       return (
         <TableRow key={timeIndex}>
           <TableCell>{formattedTime}</TableCell>
           <TableCell>{`${temp}\xB0F`}</TableCell>
           <TableCell>{tempDiff}</TableCell>
+          <TableCell>{addedCoals ? "Yes" : "No"}</TableCell>
         </TableRow>
       );
     });
@@ -31,6 +33,7 @@ const TimeTempTable: React.FC = () => {
           <TableCell>Time</TableCell>
           <TableCell>Temperature</TableCell>
           <TableCell>Temp Difference</TableCell>
+          <TableCell>Coals Added</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>{TempRows}</TableBody>
