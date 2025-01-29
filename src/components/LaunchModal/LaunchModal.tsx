@@ -25,7 +25,9 @@ const LaunchModal: React.FC = () => {
 
   return (
     <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-      {Content}
+      <div>
+        {Content}
+      </div>
     </Modal>
   );
 };
