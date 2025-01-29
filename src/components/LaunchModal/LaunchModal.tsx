@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "@material-ui/core";
+import { Modal } from "@mui/material";
 import InitEntryContent from "./InitEntryContent";
 import InitEstContent from "./InitEstContent";
 

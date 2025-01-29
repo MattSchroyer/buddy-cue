@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Select, MenuItem } from "@material-ui/core";
+import { Select, MenuItem } from "@mui/material";
 import { useTimeTempContext } from "../../contexts/TimeTempContext";
 
 export type OnDateChangeType = React.ChangeEvent<{

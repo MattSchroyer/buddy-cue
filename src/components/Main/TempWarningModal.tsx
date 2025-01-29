@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button } from "@material-ui/core";
+import { Modal, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import { useTimeTempContext } from "../../contexts/TimeTempContext";
 

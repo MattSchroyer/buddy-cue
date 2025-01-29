@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { TimeTempProvider } from "./contexts/TimeTempContext";
 import TimeTempEntry from "./components/Main/TimeTempEntry";
 import TimeTempTable from "./components/Main/TimeTempTable";
@@ -7,7 +7,7 @@ import LaunchModal from "./components/LaunchModal/LaunchModal";
 import TimeTempChart from "./components/Main/TimeTempChart";
 import TempWarningModal from "./components/Main/TempWarningModal";
 
-const theme = createMuiTheme();
+const theme = createTheme();
 
 const App: React.FC = () => {
   return (

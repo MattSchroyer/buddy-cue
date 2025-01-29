@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { Button, MenuItem, Select, TextField } from "@material-ui/core";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { useTimeTempContext } from "../../contexts/TimeTempContext";
 
 export type OnCoalsChangeType = React.ChangeEvent<{
