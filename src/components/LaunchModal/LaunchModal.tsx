@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "@material-ui/core";
+import { Modal } from "@mui/material";
 import InitEntryContent from "./InitEntryContent";
 import InitEstContent from "./InitEstContent";
 
@@ -25,7 +25,9 @@ const LaunchModal: React.FC = () => {
 
   return (
     <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-      {Content}
+      <div>
+        {Content}
+      </div>
     </Modal>
   );
 };

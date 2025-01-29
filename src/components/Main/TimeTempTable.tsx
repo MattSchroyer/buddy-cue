@@ -5,7 +5,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
-} from "@material-ui/core";
+} from "@mui/material";
 import { useTimeTempContext } from "../../contexts/TimeTempContext";
 
 const TimeTempTable: React.FC = () => {

@@ -1,12 +1,13 @@
 {
   "name": "buddy-cue",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "homepage": "https://mattschroyer.github.io/buddy-cue/",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^11.3.0",
-    "@material-ui/core": "^4.11.3",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.1",
+    "@mui/styles": "^6.4.1",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
