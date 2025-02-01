@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { TextField, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import TimeSelect from "./TimeSelect";
-import { useTimeTempContext } from "../../contexts/TimeTempContext";
+import { addTimeTemp, setWeight } from "../../redux/slices/sessionSlice";
+import { RootState } from "../../redux/store";
 
 const InitEntryContentContainer = styled.div`
   position: absolute;
@@ -49,39 +51,54 @@ export type InitEntryContentType = {
 };
 
 const InitEntryContent: React.FC<InitEntryContentType> = ({ onSubmit }) => {
-  const { timeTempCache, addTimeTemp, setWeight } = useTimeTempContext();
+  const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
+
   const startDate = new Date();
   startDate.setHours(6, 0, 0, 0);
   const [timeIndex, setTimeIndex] = useState<number>(0);
   const [time, setTime] = useState<Date>(startDate);
   const [temp, setTemp] = useState<number>(0);
   const [thisWeight, setThisWeight] = useState<number>(0);
+
+  const dispatch = useDispatch();
+
   const onTimeInputChange = (index: number, thisTime: Date) => {
     setTimeIndex(index);
     setTime(thisTime);
   };
+
   const onTempInputChange = (e: OnChangeEventType) => {
     setTemp(parseInt(e.target.value, 10));
   };
+
   const onWeightInputChange = (e: OnChangeEventType) => {
     setThisWeight(parseInt(e.target.value, 10));
   };
+
   const onTempButtonClick = () => {
-    const tempDiff = timeTempCache.length
-      ? temp - timeTempCache[timeTempCache.length - 1].temp
+    const tempDiff = timeTemp.length
+      ? temp - timeTemp[timeTemp.length - 1].temp
       : 0;
+
     const formattedTime = time
       .toLocaleTimeString()
       .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-    addTimeTemp({
-      timeIndex,
-      temp,
-      time,
-      formattedTime,
-      tempDiff,
-      addedCoals: true,
-    });
-    setWeight(thisWeight);
+    
+    dispatch(
+      addTimeTemp({
+        timeIndex,
+        temp,
+        time,
+        formattedTime,
+        tempDiff,
+        addedCoals: true,
+      })
+    );
+
+    dispatch(
+      setWeight(thisWeight)
+    );
+
     onSubmit();
   };
 

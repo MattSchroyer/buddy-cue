@@ -8,16 +8,17 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { useTimeTempContext } from "../../contexts/TimeTempContext";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const TimeTempChart: React.FC = () => {
-  const { timeTempCache } = useTimeTempContext();
+  const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
 
   return (
     <LineChart
       width={500}
       height={300}
-      data={timeTempCache}
+      data={timeTemp}
       margin={{
         top: 5,
         right: 30,

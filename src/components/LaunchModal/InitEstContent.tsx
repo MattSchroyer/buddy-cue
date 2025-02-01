@@ -1,10 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import styled from "@emotion/styled";
-import {
-  useTimeTempContext,
-  HOURS_PER_LB,
-} from "../../contexts/TimeTempContext";
+import { HOURS_PER_LB } from "../../constants";
+import { RootState } from "../../redux/store";
 
 const InitEstContentContainer = styled.div`
   position: absolute;
@@ -23,8 +22,9 @@ export type InitEntryContentType = {
 };
 
 const InitEstContent: React.FC<InitEntryContentType> = ({ onClose }) => {
-  const { weight } = useTimeTempContext();
+  const weight = useSelector((state: RootState) => state.session.weight);
   const estTime = weight * HOURS_PER_LB;
+
   return (
     <InitEstContentContainer>
       <div style={{ padding: "8px 0 8px 0" }}>

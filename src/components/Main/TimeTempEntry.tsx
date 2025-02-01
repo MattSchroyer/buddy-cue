@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
-import { useTimeTempContext } from "../../contexts/TimeTempContext";
+import { addTimeTemp } from "../../redux/slices/sessionSlice";
+import { RootState } from "../../redux/store";
+import { getStartTimes } from "../../utils";
 
 export type OnCoalsChangeType = React.ChangeEvent<{
   name?: string | undefined;
@@ -25,14 +28,18 @@ export type OnTimeInputChangeType = {
 };
 
 const TimeTempEntry: React.FC = () => {
-  const { timeTempCache, addTimeTemp, dateArr } = useTimeTempContext();
+  const dateArr = getStartTimes();
+  const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
+
   const startDate = new Date();
   startDate.setHours(6, 0, 0, 0);
   const [temp, setTemp] = useState<number>(0);
   const [coals, setCoals] = useState<number>(0);
 
-  const nextTimeIndex = timeTempCache.length
-    ? timeTempCache[timeTempCache.length - 1].timeIndex + 1
+  const dispatch = useDispatch();
+
+  const nextTimeIndex = timeTemp.length
+    ? timeTemp[timeTemp.length - 1].timeIndex + 1
     : 0;
   const nextTime = dateArr[nextTimeIndex];
   const nextTimeString = nextTime
@@ -42,21 +49,27 @@ const TimeTempEntry: React.FC = () => {
   const onTempInputChange = (e: OnChangeEventType) => {
     setTemp(parseInt(e.target.value, 10));
   };
+
   const onTempButtonClick = () => {
-    const tempDiff = timeTempCache.length
-      ? temp - timeTempCache[timeTempCache.length - 1].temp
+    // todo: time diff should be calculated in situ, not part of state or record
+    const tempDiff = timeTemp.length
+      ? temp - timeTemp[timeTemp.length - 1].temp
       : 0;
+
     const formattedTime = nextTime
       .toLocaleTimeString()
       .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-    addTimeTemp({
-      timeIndex: nextTimeIndex,
-      temp,
-      time: nextTime,
-      formattedTime,
-      tempDiff,
-      addedCoals: !!coals,
-    });
+
+    dispatch(
+      addTimeTemp({
+        timeIndex: nextTimeIndex,
+        temp,
+        time: nextTime,
+        formattedTime,
+        tempDiff,
+        addedCoals: !!coals,
+      })
+    );
   };
 
   const onCoalsChange = (e: OnCoalsChangeType) => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Select, MenuItem } from "@mui/material";
-import { useTimeTempContext } from "../../contexts/TimeTempContext";
+import { getStartTimes } from "../../utils";
 
 export type OnDateChangeType = React.ChangeEvent<{
   name?: string | undefined;
@@ -12,10 +12,10 @@ export type TimeSelectType = {
 };
 
 const TimeSelect: React.FC<TimeSelectType> = ({ onChange }) => {
-  const { dateArr } = useTimeTempContext();
+  const startTimes = getStartTimes();
   const [thisTimeIndex, setThisTimeIndex] = useState(0);
 
-  const MenuItems = dateArr.map((thisDateArr, i) => {
+  const MenuItems = startTimes.map((thisDateArr, i) => {
     return (
       <MenuItem key={thisDateArr.toString()} value={i}>
         {thisDateArr
@@ -27,7 +27,7 @@ const TimeSelect: React.FC<TimeSelectType> = ({ onChange }) => {
 
   const onTimeChange = (e: OnDateChangeType) => {
     const thisIndex = e.target.value as number;
-    const thisDate = dateArr[thisIndex];
+    const thisDate = startTimes[thisIndex];
     onChange(thisIndex, thisDate);
     setThisTimeIndex(thisIndex);
   };
