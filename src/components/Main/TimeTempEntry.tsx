@@ -51,7 +51,7 @@ const TimeTempEntry: React.FC = () => {
   };
 
   const onTempButtonClick = () => {
-    // todo: time diff should be calculated in situ, not part of state or record
+    // todo: temp delta should be calculated in situ, not part of state or record
     const tempDiff = timeTemp.length
       ? temp - timeTemp[timeTemp.length - 1].temp
       : 0;
