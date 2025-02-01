@@ -1,7 +1,9 @@
 import React from "react";
 import { Modal, Button } from "@mui/material";
 import styled from "@emotion/styled";
-import { useTimeTempContext } from "../../contexts/TimeTempContext";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { setWarning } from "../../redux/slices/sessionSlice";
 
 const TempWarningContent = styled.div`
   position: absolute;
@@ -16,7 +18,13 @@ const TempWarningContent = styled.div`
 `;
 
 const TempWarningModal: React.FC = () => {
-  const { isWarningOpen, setIsWarningOpen } = useTimeTempContext();
+
+  const isWarningOpen = useSelector((state: RootState) => state.session.isWarningOpen);
+  const dispatch = useDispatch();
+
+  const onWarningClose = () => {
+    dispatch(setWarning(false));
+  };
 
   return (
     <Modal open={isWarningOpen}>
@@ -30,7 +38,7 @@ const TempWarningModal: React.FC = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => setIsWarningOpen(false)}
+            onClick={() => onWarningClose()}
           >
             OK
           </Button>

@@ -6,14 +6,16 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { useTimeTempContext } from "../../contexts/TimeTempContext";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const TimeTempTable: React.FC = () => {
-  const { timeTempCache } = useTimeTempContext();
+
+  const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
 
   const TempRows =
-    timeTempCache &&
-    timeTempCache.map((thisTimeTemp) => {
+    timeTemp &&
+    timeTemp.map((thisTimeTemp) => {
       const { timeIndex, formattedTime, temp, tempDiff, addedCoals } =
         thisTimeTemp;
       return (
