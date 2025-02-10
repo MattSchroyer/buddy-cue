@@ -4,8 +4,7 @@ import { GOAL_INT_TEMP, HOURS_PER_LB } from '../../constants';
 
 export type TimeTempType = {
   timeIndex: number;
-  time: Date;
-  formattedTime: string;
+  time: string;
   temp: number;
   tempDiff: number;
   addedCoals: boolean;
