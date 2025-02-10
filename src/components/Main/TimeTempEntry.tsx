@@ -56,19 +56,16 @@ const TimeTempEntry: React.FC = () => {
       ? temp - timeTemp[timeTemp.length - 1].temp
       : 0;
 
-    const formattedTime = nextTime
-      .toLocaleTimeString()
-      .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+    const newTimeTemp = {
+      timeIndex: nextTimeIndex,
+      temp,
+      time: nextTime.toISOString(),
+      tempDiff,
+      addedCoals: !!coals,
+    };
 
     dispatch(
-      addTimeTemp({
-        timeIndex: nextTimeIndex,
-        temp,
-        time: nextTime,
-        formattedTime,
-        tempDiff,
-        addedCoals: !!coals,
-      })
+      addTimeTemp(newTimeTemp)
     );
   };
 

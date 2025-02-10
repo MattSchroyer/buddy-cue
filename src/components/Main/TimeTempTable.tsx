@@ -8,16 +8,21 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { getFormattedTime } from "../../utils";
 
 const TimeTempTable: React.FC = () => {
 
   const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
 
+  // TODO: Row can be own component
   const TempRows =
     timeTemp &&
     timeTemp.map((thisTimeTemp) => {
-      const { timeIndex, formattedTime, temp, tempDiff, addedCoals } =
+      const { timeIndex, time, temp, tempDiff, addedCoals } =
         thisTimeTemp;
+
+      const formattedTime = getFormattedTime(time);
+
       return (
         <TableRow key={timeIndex}>
           <TableCell>{formattedTime}</TableCell>

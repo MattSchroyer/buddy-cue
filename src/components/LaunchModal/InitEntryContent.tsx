@@ -80,19 +80,16 @@ const InitEntryContent: React.FC<InitEntryContentType> = ({ onSubmit }) => {
       ? temp - timeTemp[timeTemp.length - 1].temp
       : 0;
 
-    const formattedTime = time
-      .toLocaleTimeString()
-      .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+    const newTimeTemp = {
+      timeIndex,
+      temp,
+      time: time.toISOString(),
+      tempDiff,
+      addedCoals: true,
+    };
     
     dispatch(
-      addTimeTemp({
-        timeIndex,
-        temp,
-        time,
-        formattedTime,
-        tempDiff,
-        addedCoals: true,
-      })
+      addTimeTemp(newTimeTemp)
     );
 
     dispatch(

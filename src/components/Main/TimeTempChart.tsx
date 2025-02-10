@@ -10,15 +10,18 @@ import {
 } from "recharts";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
+import { getFormattedTimeTemp } from "../../utils";
 
 const TimeTempChart: React.FC = () => {
   const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
+
+  const formattedTimeTemp = getFormattedTimeTemp(timeTemp);
 
   return (
     <LineChart
       width={500}
       height={300}
-      data={timeTemp}
+      data={formattedTimeTemp}
       margin={{
         top: 5,
         right: 30,
