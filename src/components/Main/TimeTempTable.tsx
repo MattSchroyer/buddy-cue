@@ -14,6 +14,7 @@ const TimeTempTable: React.FC = () => {
 
   const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
 
+  // TODO: Row can be own component
   const TempRows =
     timeTemp &&
     timeTemp.map((thisTimeTemp) => {
