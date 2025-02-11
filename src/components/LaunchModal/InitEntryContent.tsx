@@ -76,15 +76,10 @@ const InitEntryContent: React.FC<InitEntryContentType> = ({ onSubmit }) => {
   };
 
   const onTempButtonClick = () => {
-    const tempDiff = timeTemp.length
-      ? temp - timeTemp[timeTemp.length - 1].temp
-      : 0;
-
     const newTimeTemp = {
       timeIndex,
       temp,
       time: time.toISOString(),
-      tempDiff,
       addedCoals: true,
     };
     

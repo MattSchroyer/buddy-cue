@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { isTempWarning } from '../../utils';
 import { GOAL_INT_TEMP, HOURS_PER_LB } from '../../constants';
 
+// TODO: remove unnecessary timeIndex
 export type TimeTempType = {
   timeIndex: number;
   time: string;
   temp: number;
-  tempDiff: number;
   addedCoals: boolean;
 };
 

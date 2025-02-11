@@ -17,11 +17,15 @@ const TimeTempTable: React.FC = () => {
   // TODO: Row can be own component
   const TempRows =
     timeTemp &&
-    timeTemp.map((thisTimeTemp) => {
-      const { timeIndex, time, temp, tempDiff, addedCoals } =
+    timeTemp.map((thisTimeTemp, i) => {
+      const { timeIndex, time, temp, addedCoals } =
         thisTimeTemp;
 
       const formattedTime = getFormattedTime(time);
+
+      const tempDiff = i
+        ? temp - timeTemp[i - 1].temp
+        : 0;
 
       return (
         <TableRow key={timeIndex}>
