@@ -51,16 +51,10 @@ const TimeTempEntry: React.FC = () => {
   };
 
   const onTempButtonClick = () => {
-    // todo: temp delta should be calculated in situ, not part of state or record
-    const tempDiff = timeTemp.length
-      ? temp - timeTemp[timeTemp.length - 1].temp
-      : 0;
-
     const newTimeTemp = {
       timeIndex: nextTimeIndex,
       temp,
       time: nextTime.toISOString(),
-      tempDiff,
       addedCoals: !!coals,
     };
 
