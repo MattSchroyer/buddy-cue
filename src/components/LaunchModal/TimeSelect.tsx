@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Select, MenuItem } from "@mui/material";
-import { getStartTimes } from "../../utils";
+import { getFormattedTime, getTimeIntervals } from "../../utils";
 
 export type OnDateChangeType = React.ChangeEvent<{
   name?: string | undefined;
@@ -12,17 +12,15 @@ export type TimeSelectType = {
 };
 
 const TimeSelect: React.FC<TimeSelectType> = ({ onChange }) => {
-  const startTimes = getStartTimes();
+  const startTimes = getTimeIntervals();
   const firstStartTime = startTimes[0].toString();
   const [thisTimeString, setThisTimeString] = useState<string | undefined>(firstStartTime);
 
-  const MenuItems = startTimes.map((date) => {
-    const dateString = date.toString();
+  const MenuItems = startTimes.map((dateString: string) => {
+    const formattedTime = getFormattedTime(dateString);
     return (
       <MenuItem key={dateString} value={dateString}>
-        {date
-          .toLocaleTimeString()
-          .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")}
+        {formattedTime}
       </MenuItem>
     );
   });
