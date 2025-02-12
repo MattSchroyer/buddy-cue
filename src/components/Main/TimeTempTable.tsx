@@ -18,7 +18,7 @@ const TimeTempTable: React.FC = () => {
   const TempRows =
     timeTemp &&
     timeTemp.map((thisTimeTemp, i) => {
-      const { timeIndex, time, temp, addedCoals } =
+      const { time, temp, addedCoals } =
         thisTimeTemp;
 
       const formattedTime = getFormattedTime(time);
@@ -28,7 +28,7 @@ const TimeTempTable: React.FC = () => {
         : 0;
 
       return (
-        <TableRow key={timeIndex}>
+        <TableRow key={time}>
           <TableCell>{formattedTime}</TableCell>
           <TableCell>{`${temp}\xB0F`}</TableCell>
           <TableCell>{tempDiff}</TableCell>

@@ -38,10 +38,10 @@ const TimeTempEntry: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const nextTimeIndex = timeTemp.length
-    ? timeTemp[timeTemp.length - 1].timeIndex + 1
-    : 0;
-  const nextTime = dateArr[nextTimeIndex];
+  const prevTime = new Date(timeTemp.at(-1)?.time || dateArr[0]);
+
+  // TODO: No magic numbers
+  const nextTime = new Date(prevTime.getTime() + (30 * 60 * 1000));
   const nextTimeString = nextTime
     .toLocaleTimeString()
     .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
@@ -52,7 +52,6 @@ const TimeTempEntry: React.FC = () => {
 
   const onTempButtonClick = () => {
     const newTimeTemp = {
-      timeIndex: nextTimeIndex,
       temp,
       time: nextTime.toISOString(),
       addedCoals: !!coals,
