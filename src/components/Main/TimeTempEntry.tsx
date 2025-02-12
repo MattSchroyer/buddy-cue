@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { addTimeTemp } from "../../redux/slices/sessionSlice";
 import { RootState } from "../../redux/store";
-import { getFormattedTime, getTimeIntervals } from "../../utils";
+import { getDefaultStartDate, getFormattedTime, getTimeIntervals } from "../../utils";
 
 export type OnCoalsChangeType = React.ChangeEvent<{
   name?: string | undefined;
@@ -31,8 +31,6 @@ const TimeTempEntry: React.FC = () => {
   const timeArr = getTimeIntervals();
   const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
 
-  const startDate = new Date();
-  startDate.setHours(6, 0, 0, 0);
   const [temp, setTemp] = useState<number>(0);
   const [coals, setCoals] = useState<number>(0);
 
