@@ -13,8 +13,7 @@ export type TimeSelectType = {
 
 const TimeSelect: React.FC<TimeSelectType> = ({ onChange }) => {
   const startTimes = getTimeIntervals();
-  const firstStartTime = startTimes[0].toString();
-  const [thisTimeString, setThisTimeString] = useState<string | undefined>(firstStartTime);
+  const [thisTimeString, setThisTimeString] = useState<string | undefined>(startTimes[0]);
 
   const MenuItems = startTimes.map((dateString: string) => {
     const formattedTime = getFormattedTime(dateString);
