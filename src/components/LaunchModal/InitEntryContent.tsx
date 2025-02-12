@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { TextField, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import TimeSelect from "./TimeSelect";
 import { addTimeTemp, setWeight } from "../../redux/slices/sessionSlice";
-import { RootState } from "../../redux/store";
+import { getDefaultStartTime } from "../../utils";
 
 const InitEntryContentContainer = styled.div`
   position: absolute;
@@ -51,19 +51,15 @@ export type InitEntryContentType = {
 };
 
 const InitEntryContent: React.FC<InitEntryContentType> = ({ onSubmit }) => {
-  const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
+  const startTime = getDefaultStartTime();
 
-  const startDate = new Date();
-  startDate.setHours(6, 0, 0, 0);
-  const [timeIndex, setTimeIndex] = useState<number>(0);
-  const [time, setTime] = useState<Date>(startDate);
+  const [time, setTime] = useState<string>(startTime);
   const [temp, setTemp] = useState<number>(0);
   const [thisWeight, setThisWeight] = useState<number>(0);
 
   const dispatch = useDispatch();
 
-  const onTimeInputChange = (index: number, thisTime: Date) => {
-    setTimeIndex(index);
+  const onTimeInputChange = (thisTime: string) => {
     setTime(thisTime);
   };
 
@@ -77,9 +73,8 @@ const InitEntryContent: React.FC<InitEntryContentType> = ({ onSubmit }) => {
 
   const onTempButtonClick = () => {
     const newTimeTemp = {
-      timeIndex,
       temp,
-      time: time.toISOString(),
+      time,
       addedCoals: true,
     };
     

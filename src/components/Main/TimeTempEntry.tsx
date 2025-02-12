@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { addTimeTemp } from "../../redux/slices/sessionSlice";
 import { RootState } from "../../redux/store";
-import { getStartTimes } from "../../utils";
+import { getDefaultStartDate, getFormattedTime, getTimeIntervals } from "../../utils";
 
 export type OnCoalsChangeType = React.ChangeEvent<{
   name?: string | undefined;
@@ -28,23 +28,19 @@ export type OnTimeInputChangeType = {
 };
 
 const TimeTempEntry: React.FC = () => {
-  const dateArr = getStartTimes();
+  const timeArr = getTimeIntervals();
   const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
 
-  const startDate = new Date();
-  startDate.setHours(6, 0, 0, 0);
   const [temp, setTemp] = useState<number>(0);
   const [coals, setCoals] = useState<number>(0);
 
   const dispatch = useDispatch();
 
-  const nextTimeIndex = timeTemp.length
-    ? timeTemp[timeTemp.length - 1].timeIndex + 1
-    : 0;
-  const nextTime = dateArr[nextTimeIndex];
-  const nextTimeString = nextTime
-    .toLocaleTimeString()
-    .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+  const prevTime = new Date(timeTemp.at(-1)?.time || timeArr[0]);
+
+  // TODO: No magic numbers
+  const newTime = new Date(prevTime.getTime() + (30 * 60 * 1000)).toISOString();
+  const newTimeFormatted = getFormattedTime(newTime);
 
   const onTempInputChange = (e: OnChangeEventType) => {
     setTemp(parseInt(e.target.value, 10));
@@ -52,9 +48,8 @@ const TimeTempEntry: React.FC = () => {
 
   const onTempButtonClick = () => {
     const newTimeTemp = {
-      timeIndex: nextTimeIndex,
       temp,
-      time: nextTime.toISOString(),
+      time: newTime,
       addedCoals: !!coals,
     };
 
@@ -69,7 +64,7 @@ const TimeTempEntry: React.FC = () => {
 
   return (
     <TimeTempEntryContent>
-      <div style={{ padding: "12px" }}>{nextTimeString}</div>
+      <div style={{ padding: "12px" }}>{newTimeFormatted}</div>
       <div style={{ padding: "12px" }}>
         <TextField
           id="temp-input"

@@ -1,35 +1,33 @@
 import React, { useState } from "react";
 import { Select, MenuItem } from "@mui/material";
-import { getStartTimes } from "../../utils";
+import { getFormattedTime, getTimeIntervals } from "../../utils";
 
 export type OnDateChangeType = React.ChangeEvent<{
   name?: string | undefined;
-  value: unknown;
+  value: string;
 }>;
 
 export type TimeSelectType = {
-  onChange: (i: number, d: Date) => void;
+  onChange: (dateString: string) => void;
 };
 
 const TimeSelect: React.FC<TimeSelectType> = ({ onChange }) => {
-  const startTimes = getStartTimes();
-  const [thisTimeIndex, setThisTimeIndex] = useState(0);
+  const startTimes = getTimeIntervals();
+  const [thisTimeString, setThisTimeString] = useState<string | undefined>(startTimes[0]);
 
-  const MenuItems = startTimes.map((thisDateArr, i) => {
+  const MenuItems = startTimes.map((dateString: string) => {
+    const formattedTime = getFormattedTime(dateString);
     return (
-      <MenuItem key={thisDateArr.toString()} value={i}>
-        {thisDateArr
-          .toLocaleTimeString()
-          .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")}
+      <MenuItem key={dateString} value={dateString}>
+        {formattedTime}
       </MenuItem>
     );
   });
 
   const onTimeChange = (e: OnDateChangeType) => {
-    const thisIndex = e.target.value as number;
-    const thisDate = startTimes[thisIndex];
-    onChange(thisIndex, thisDate);
-    setThisTimeIndex(thisIndex);
+    const thisDateString = e.target.value;
+    onChange(thisDateString);
+    setThisTimeString(thisDateString);
   };
 
   return (
@@ -37,7 +35,7 @@ const TimeSelect: React.FC<TimeSelectType> = ({ onChange }) => {
       labelId="demo-simple-select-label"
       id="demo-simple-select"
       onChange={(e) => onTimeChange(e)}
-      value={thisTimeIndex}
+      value={thisTimeString}
     >
       {MenuItems}
     </Select>

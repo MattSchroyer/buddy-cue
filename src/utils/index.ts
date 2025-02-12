@@ -1,13 +1,26 @@
 import { TimeTempType } from "../redux/slices/sessionSlice";
 
-export const getStartTimes = (): Date[] => {
+export const getDefaultStartDate = (): Date => {
   const startDate = new Date();
   startDate.setHours(6, 0, 0, 0);
+
+  return startDate;
+};
+
+export const getDefaultStartTime = (): string => {
+  const defaultStartDate = getDefaultStartDate();
+  
+  return defaultStartDate.toISOString();
+}
+
+export const getTimeIntervals = (): string[] => {
+  const startDate = getDefaultStartDate();
 
   const startTimes = Array.from(Array(29), (x, i) => {
     const thisDate = new Date(startDate);
     thisDate.setMinutes(startDate.getMinutes() + 30 * i);
-    return thisDate;
+
+    return thisDate.toString();
   });
 
   return startTimes;
