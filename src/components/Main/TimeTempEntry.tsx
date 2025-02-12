@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { addTimeTemp } from "../../redux/slices/sessionSlice";
 import { RootState } from "../../redux/store";
-import { getTimeIntervals } from "../../utils";
+import { getFormattedTime, getTimeIntervals } from "../../utils";
 
 export type OnCoalsChangeType = React.ChangeEvent<{
   name?: string | undefined;
@@ -41,10 +41,8 @@ const TimeTempEntry: React.FC = () => {
   const prevTime = new Date(timeTemp.at(-1)?.time || timeArr[0]);
 
   // TODO: No magic numbers
-  const nextTime = new Date(prevTime.getTime() + (30 * 60 * 1000));
-  const nextTimeString = nextTime
-    .toLocaleTimeString()
-    .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+  const newTime = new Date(prevTime.getTime() + (30 * 60 * 1000)).toISOString();
+  const newTimeFormatted = getFormattedTime(newTime);
 
   const onTempInputChange = (e: OnChangeEventType) => {
     setTemp(parseInt(e.target.value, 10));
@@ -53,7 +51,7 @@ const TimeTempEntry: React.FC = () => {
   const onTempButtonClick = () => {
     const newTimeTemp = {
       temp,
-      time: nextTime.toISOString(),
+      time: newTime,
       addedCoals: !!coals,
     };
 
@@ -68,7 +66,7 @@ const TimeTempEntry: React.FC = () => {
 
   return (
     <TimeTempEntryContent>
-      <div style={{ padding: "12px" }}>{nextTimeString}</div>
+      <div style={{ padding: "12px" }}>{newTimeFormatted}</div>
       <div style={{ padding: "12px" }}>
         <TextField
           id="temp-input"
