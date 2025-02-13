@@ -7,8 +7,8 @@ import {
   TableRow,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { getFormattedTime } from "../../utils";
+import { RootState } from "../../../redux/store";
+import { getFormattedTime } from "../../../utils";
 
 const TimeTempTable: React.FC = () => {
 

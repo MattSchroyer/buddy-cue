@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Select, MenuItem } from "@mui/material";
-import { getFormattedTime, getTimeIntervals } from "../../utils";
+import { getFormattedTime, getTimeIntervals } from "../../../utils";
 
 export type OnDateChangeType = React.ChangeEvent<{
   name?: string | undefined;
   value: string;
 }>;
 
-export type TimeSelectType = {
+export type Props = {
   onChange: (dateString: string) => void;
 };
 
-const TimeSelect: React.FC<TimeSelectType> = ({ onChange }) => {
+const TimeSelect: React.FC<Props> = ({ onChange }) => {
   const startTimes = getTimeIntervals();
   const [thisTimeString, setThisTimeString] = useState<string | undefined>(startTimes[0]);
 

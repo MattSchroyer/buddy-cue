@@ -2,8 +2,8 @@ import React from "react";
 import { Modal, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { setWarning } from "../../redux/slices/sessionSlice";
+import { RootState } from "../../../redux/store";
+import { setWarning } from "../../../redux/slices/sessionSlice";
 
 const TempWarningContent = styled.div`
   position: absolute;
