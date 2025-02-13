@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { TextField, Button } from "@mui/material";
 import styled from "@emotion/styled";
-import TimeSelect from "./TimeSelect";
-import { addTimeTemp, setWeight } from "../../redux/slices/sessionSlice";
-import { getDefaultStartTime } from "../../utils";
+import TimeSelect from "../TimeSelect/TimeSelect";
+import { addTimeTemp, setWeight } from "../../../redux/slices/sessionSlice";
+import { getDefaultStartTime } from "../../../utils";
 
 const InitEntryContentContainer = styled.div`
   position: absolute;
@@ -46,11 +46,11 @@ export type OnTimeInputChangeType = {
   name?: string | undefined;
 };
 
-export type InitEntryContentType = {
+export type Props = {
   onSubmit: () => void;
 };
 
-const InitEntryContent: React.FC<InitEntryContentType> = ({ onSubmit }) => {
+const InitEntryContent: React.FC<Props> = ({ onSubmit }) => {
   const startTime = getDefaultStartTime();
 
   const [time, setTime] = useState<string>(startTime);

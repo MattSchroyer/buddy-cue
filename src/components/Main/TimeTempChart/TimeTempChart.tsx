@@ -9,8 +9,8 @@ import {
   Legend,
 } from "recharts";
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { getFormattedTimeTemp } from "../../utils";
+import { RootState } from "../../../redux/store";
+import { getFormattedTimeTemp } from "../../../utils";
 
 const TimeTempChart: React.FC = () => {
   const timeTemp = useSelector((state: RootState) => state.session.timeTemp);

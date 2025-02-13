@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import styled from "@emotion/styled";
-import { HOURS_PER_LB } from "../../constants";
-import { RootState } from "../../redux/store";
+import { HOURS_PER_LB } from "../../../constants";
+import { RootState } from "../../../redux/store";
 
 const InitEstContentContainer = styled.div`
   position: absolute;
@@ -17,11 +17,11 @@ const InitEstContentContainer = styled.div`
   border-radius: 4px;
 `;
 
-export type InitEntryContentType = {
+export type Props = {
   onClose: () => void;
 };
 
-const InitEstContent: React.FC<InitEntryContentType> = ({ onClose }) => {
+const InitEstContent: React.FC<Props> = ({ onClose }) => {
   const weight = useSelector((state: RootState) => state.session.weight);
   const estTime = weight * HOURS_PER_LB;
 
