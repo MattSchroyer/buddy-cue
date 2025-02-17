@@ -8,7 +8,7 @@ export type Props = {
   addedCoals: boolean;
 }
 
-const TimeTempRow: React.FC<Props> = ({
+const TimeTempTableRow: React.FC<Props> = ({
   formattedTime,
   temp,
   tempDiff,
@@ -25,4 +25,4 @@ const TimeTempRow: React.FC<Props> = ({
   );
 };
 
-export default TimeTempRow;
+export default TimeTempTableRow;
