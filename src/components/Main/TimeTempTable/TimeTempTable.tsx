@@ -1,53 +1,14 @@
 import React from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
-import { getFormattedTime } from "../../../utils";
+import { Table } from "@mui/material";
+import TimeTempTableBody from "./TimeTempTableBody";
+import TimeTempTableHeader from "./TimeTempTableHeader";
 
 const TimeTempTable: React.FC = () => {
 
-  const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
-
-  // TODO: Row can be own component
-  const TempRows =
-    timeTemp &&
-    timeTemp.map((thisTimeTemp, i) => {
-      const { time, temp, addedCoals } =
-        thisTimeTemp;
-
-      const formattedTime = getFormattedTime(time);
-
-      const tempDiff = i
-        ? temp - timeTemp[i - 1].temp
-        : 0;
-
-      return (
-        <TableRow key={time}>
-          <TableCell>{formattedTime}</TableCell>
-          <TableCell>{`${temp}\xB0F`}</TableCell>
-          <TableCell>{tempDiff}</TableCell>
-          <TableCell>{addedCoals ? "Yes" : "No"}</TableCell>
-        </TableRow>
-      );
-    });
-
   return (
     <Table className="temp-table" aria-label="simple table">
-      <TableHead>
-        <TableRow>
-          <TableCell>Time</TableCell>
-          <TableCell>Temperature</TableCell>
-          <TableCell>Temp Difference</TableCell>
-          <TableCell>Coals Added</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>{TempRows}</TableBody>
+      <TimeTempTableHeader />
+      <TimeTempTableBody />
     </Table>
   );
 };
