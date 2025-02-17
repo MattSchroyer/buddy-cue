@@ -12,6 +12,7 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
+    ignores: ["node_modules/*", "dist/*"],
     rules: {
       "no-restricted-globals": ["warn", "numeral", "length", "Permissions", "Notification"],
       "no-console": "warn",
@@ -43,5 +44,9 @@ export default [
       "no-var": "warn",
       "no-param-reassign": ["warn", { "props": true, "ignorePropertyModificationsForRegex": ["^draft"] }]
     }
-  }
+  },
+  {
+    files: ['src/redux/slices/*.ts'],
+    rules: { 'no-param-reassign': ['error', { props: false }] },
+  },
 ];
