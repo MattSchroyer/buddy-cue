@@ -33,6 +33,7 @@ const timeTempSlice = createSlice({
         GOAL_INT_TEMP,
         HOURS_PER_LB,
       );
+
       state.isWarningOpen = isWarningOpen;
     },
     setWeight: (state, { payload }) => {
