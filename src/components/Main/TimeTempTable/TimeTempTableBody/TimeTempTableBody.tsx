@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/store";
-import TimeTempTableRow from "../TimeTempTableRow";
+import TimeTempTableRow from "./TimeTempTableRow";
 import { getFormattedTime } from "../../../../utils";
 import { TableBody } from "@mui/material";
 
