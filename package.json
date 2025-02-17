@@ -16,8 +16,6 @@
     "@types/node": "^22.12.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "eslint-config-airbnb-typescript-prettier": "^4.2.0",
-    "prettier": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.2.0",
@@ -29,17 +27,11 @@
     "build": "vite build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
-    "lint": "tsc --noEmit && eslint src/**/*.tsx",
+    "lint": "npx eslint 'src/**/*.{ts, tsx}'",
     "predeploy": "npm run build",
     "serve": "vite preview",
     "start": "vite",
     "test": "react-scripts test"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -54,11 +46,13 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
+    "@eslint/js": "^9.20.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^7.24.0",
+    "eslint": "^9.20.1",
+    "eslint-plugin-react": "^7.37.4",
     "gh-pages": "^3.2.3",
+    "globals": "^15.15.0",
+    "typescript-eslint": "^8.24.1",
     "vite": "^6.0.11"
   }
 }
