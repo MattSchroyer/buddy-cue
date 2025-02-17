@@ -9,6 +9,7 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { getFormattedTime } from "../../../utils";
+import TimeTempRow from "./TimeTempRow";
 
 const TimeTempTable: React.FC = () => {
 
@@ -27,13 +28,15 @@ const TimeTempTable: React.FC = () => {
         ? temp - timeTemp[i - 1].temp
         : 0;
 
+      const props = {
+        formattedTime,
+        temp,
+        tempDiff,
+        addedCoals,
+      };
+
       return (
-        <TableRow key={time}>
-          <TableCell>{formattedTime}</TableCell>
-          <TableCell>{`${temp}\xB0F`}</TableCell>
-          <TableCell>{tempDiff}</TableCell>
-          <TableCell>{addedCoals ? "Yes" : "No"}</TableCell>
-        </TableRow>
+        <TimeTempRow key={time} {...props}/>
       );
     });
 
