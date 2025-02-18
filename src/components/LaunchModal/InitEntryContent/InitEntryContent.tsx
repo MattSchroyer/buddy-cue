@@ -29,12 +29,6 @@ const LaunchModalInput = styled.div`
   display: flex;
 `;
 
-const TimeInputContainer = styled.div`
-  padding: 8px;
-  display: flex;
-  justify-content: center;
-`;
-
 export type OnChangeEventType = {
   target: {
     value: string;
@@ -92,35 +86,38 @@ const InitEntryContent: React.FC<Props> = ({ onSubmit }) => {
         <div>Please select a starting time, temp (in ºF), and weight (in lbs).</div>
       </LaunchModalHeader>
       <LaunchModalInput>
-        <TimeInputContainer>
-          <TimeSelect onChange={onTimeInputChange} />
-        </TimeInputContainer>
-        <div style={{ padding: '8px' }}>
-          <TextField
-            id="temp-input"
-            label="Temperature"
-            variant="outlined"
-            onChange={onTempInputChange}
-          />
-        </div>
-        <div style={{ padding: '8px' }}>
-          <TextField
-            id="weight-input"
-            label="Weight"
-            variant="outlined"
-            onChange={onWeightInputChange}
-          />
-        </div>
+        <form>
+          <div style={{ padding: '8px' }}>
+            <TimeSelect onChange={onTimeInputChange} />
+          </div>
+          <div style={{ padding: '8px' }}>
+            <TextField
+              id="temp-input"
+              label="Temperature"
+              variant="outlined"
+              onChange={onTempInputChange}
+            />
+          </div>
+          <div style={{ padding: '8px' }}>
+            <TextField
+              id="weight-input"
+              label="Weight"
+              variant="outlined"
+              onChange={onWeightInputChange}
+            />
+          </div>
+          <div style={{ padding: '8px' }}>
+            <Button
+              color="primary"
+              type="submit"
+              variant="contained"
+              onClick={onTempButtonClick}
+            >
+              Enter
+            </Button>
+          </div>
+        </form>
       </LaunchModalInput>
-      <div style={{ padding: '8px 0 8px 0' }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={onTempButtonClick}
-        >
-          Enter
-        </Button>
-      </div>
     </InitEntryContentContainer>
   );
 };
