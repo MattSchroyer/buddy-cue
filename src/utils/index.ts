@@ -1,4 +1,4 @@
-import { TimeTempType } from "../redux/slices/sessionSlice";
+import { TimeTempType } from '../redux/slices/sessionSlice';
 
 export const getDefaultStartDate = (): Date => {
   const startDate = new Date();
@@ -10,9 +10,9 @@ export const getDefaultStartDate = (): Date => {
 
 export const getDefaultStartTime = (): string => {
   const defaultStartDate = getDefaultStartDate();
-  
+
   return defaultStartDate.toISOString();
-}
+};
 
 export const getTimeIntervals = (): string[] => {
   const startDate = getDefaultStartDate();
@@ -46,16 +46,14 @@ export const isTempWarning = (
 };
 
 export const getFormattedTime = (time: string) => {
-  return new Date(time)
-    .toLocaleTimeString()
-    .replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+  return new Date(time).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, '$1$3');
 };
 
 export const getFormattedTimeTemp = (timeTemp: TimeTempType[]) => {
   const formattedTimeTemp = timeTemp.map((el) => {
-    const{ time } = el;
+    const { time } = el;
     const formattedTime = getFormattedTime(time);
-    
+
     return {
       ...el,
       formattedTime,

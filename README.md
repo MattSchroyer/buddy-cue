@@ -38,6 +38,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 Pushes the React app to the GitHub repository, triggering predepoy and deploy scripts to run, via the [`react-gh-pages` dependency](https://github.com/gitname/react-gh-pages).
 
 Optionally, add a commit message for posterity:
+
 ```
 $ npm run deploy -- -m "Deploy React app to GitHub Pages"
 ```

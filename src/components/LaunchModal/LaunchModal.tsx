@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Modal } from "@mui/material";
-import InitEntryContent from "./InitEntryContent/";
-import InitEstContent from "./InitEstContent/";
+import React, { useState } from 'react';
+import { Modal } from '@mui/material';
+import InitEntryContent from './InitEntryContent/';
+import InitEstContent from './InitEstContent/';
 
 export type OnChangeEventType = {
   target: {
@@ -25,9 +25,7 @@ const LaunchModal: React.FC = () => {
 
   return (
     <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-      <div>
-        {Content}
-      </div>
+      <div>{Content}</div>
     </Modal>
   );
 };

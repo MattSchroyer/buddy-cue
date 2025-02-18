@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import LaunchModal from "./components/LaunchModal/LaunchModal";
-import Main from "./components/Main";
+import LaunchModal from './components/LaunchModal/LaunchModal';
+import Main from './components/Main';
 
 const theme = createTheme();
 
