@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled from "@emotion/styled";
-import { Button, MenuItem, Select, TextField } from "@mui/material";
-import { addTimeTemp } from "../../../redux/slices/sessionSlice";
-import { RootState } from "../../../redux/store";
-import { getDefaultStartDate, getFormattedTime, getTimeIntervals } from "../../../utils";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from '@emotion/styled';
+import { Button, MenuItem, Select, TextField } from '@mui/material';
+import { addTimeTemp } from '../../../redux/slices/sessionSlice';
+import { RootState } from '../../../redux/store';
+import { getDefaultStartDate, getFormattedTime, getTimeIntervals } from '../../../utils';
 
 export type OnCoalsChangeType = React.ChangeEvent<{
   name?: string | undefined;
@@ -39,7 +39,7 @@ const TimeTempEntry: React.FC = () => {
   const prevTime = new Date(timeTemp.at(-1)?.time || timeArr[0]);
 
   // TODO: No magic numbers
-  const newTime = new Date(prevTime.getTime() + (30 * 60 * 1000)).toISOString();
+  const newTime = new Date(prevTime.getTime() + 30 * 60 * 1000).toISOString();
   const newTimeFormatted = getFormattedTime(newTime);
 
   const onTempInputChange = (e: OnChangeEventType) => {
@@ -53,9 +53,7 @@ const TimeTempEntry: React.FC = () => {
       addedCoals: !!coals,
     };
 
-    dispatch(
-      addTimeTemp(newTimeTemp)
-    );
+    dispatch(addTimeTemp(newTimeTemp));
   };
 
   const onCoalsChange = (e: OnCoalsChangeType) => {
@@ -64,8 +62,8 @@ const TimeTempEntry: React.FC = () => {
 
   return (
     <TimeTempEntryContent>
-      <div style={{ padding: "12px" }}>{newTimeFormatted}</div>
-      <div style={{ padding: "12px" }}>
+      <div style={{ padding: '12px' }}>{newTimeFormatted}</div>
+      <div style={{ padding: '12px' }}>
         <TextField
           id="temp-input"
           label="Temperature"
@@ -74,22 +72,13 @@ const TimeTempEntry: React.FC = () => {
           onChange={(e) => onTempInputChange(e)}
         />
       </div>
-      <div style={{ padding: "12px" }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => onTempButtonClick()}
-        >
+      <div style={{ padding: '12px' }}>
+        <Button variant="contained" color="primary" onClick={() => onTempButtonClick()}>
           Enter Temp
         </Button>
       </div>
-      <div style={{ padding: "12px" }}>
-        <Select
-          labelId="add-coals-select"
-          id="add-coals-select"
-          onChange={(e) => onCoalsChange(e)}
-          value={coals}
-        >
+      <div style={{ padding: '12px' }}>
+        <Select labelId="add-coals-select" id="add-coals-select" onChange={(e) => onCoalsChange(e)} value={coals}>
           <MenuItem value={0}>No</MenuItem>
           <MenuItem value={1}>Yes</MenuItem>
         </Select>

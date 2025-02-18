@@ -12,7 +12,7 @@ export interface SessionState {
   timeTemp: TimeTempType[];
   weight: number;
   isWarningOpen: boolean;
-};
+}
 
 const initialState: SessionState = {
   timeTemp: [],
@@ -27,12 +27,7 @@ const timeTempSlice = createSlice({
     addTimeTemp: (state, { payload }) => {
       state.timeTemp = [...state.timeTemp, payload];
 
-      const isWarningOpen = isTempWarning(
-        state.timeTemp,
-        state.weight,
-        GOAL_INT_TEMP,
-        HOURS_PER_LB,
-      );
+      const isWarningOpen = isTempWarning(state.timeTemp, state.weight, GOAL_INT_TEMP, HOURS_PER_LB);
 
       state.isWarningOpen = isWarningOpen;
     },

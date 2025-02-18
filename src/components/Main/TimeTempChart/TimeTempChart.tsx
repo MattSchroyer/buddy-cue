@@ -1,16 +1,8 @@
-import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../redux/store";
-import { getFormattedTimeTemp } from "../../../utils";
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { getFormattedTimeTemp } from '../../../utils';
 
 const TimeTempChart: React.FC = () => {
   const timeTemp = useSelector((state: RootState) => state.session.timeTemp);
@@ -34,12 +26,7 @@ const TimeTempChart: React.FC = () => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line
-        type="monotone"
-        dataKey="temp"
-        stroke="#8884d8"
-        activeDot={{ r: 8 }}
-      />
+      <Line type="monotone" dataKey="temp" stroke="#8884d8" activeDot={{ r: 8 }} />
     </LineChart>
   );
 };

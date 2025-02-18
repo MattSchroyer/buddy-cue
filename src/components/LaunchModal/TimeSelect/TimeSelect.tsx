@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Select, MenuItem } from "@mui/material";
-import { getFormattedTime, getTimeIntervals } from "../../../utils";
+import React, { useState } from 'react';
+import { Select, MenuItem } from '@mui/material';
+import { getFormattedTime, getTimeIntervals } from '../../../utils';
 
 export type OnDateChangeType = React.ChangeEvent<{
   name?: string | undefined;

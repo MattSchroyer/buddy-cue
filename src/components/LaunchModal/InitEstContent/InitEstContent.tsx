@@ -1,9 +1,9 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { Button } from "@mui/material";
-import styled from "@emotion/styled";
-import { HOURS_PER_LB } from "../../../constants";
-import { RootState } from "../../../redux/store";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Button } from '@mui/material';
+import styled from '@emotion/styled';
+import { HOURS_PER_LB } from '../../../constants';
+import { RootState } from '../../../redux/store';
 
 const InitEstContentContainer = styled.div`
   position: absolute;
@@ -27,16 +27,12 @@ const InitEstContent: React.FC<Props> = ({ onClose }) => {
 
   return (
     <InitEstContentContainer>
-      <div style={{ padding: "8px 0 8px 0" }}>
+      <div style={{ padding: '8px 0 8px 0' }}>
         <h1>Excellent.</h1>
-        <div
-          style={{ paddingBottom: "8px" }}
-        >{`Your time estimated smoking time is ${estTime} hours.`}</div>
-        <div style={{ paddingBottom: "8px" }}>
-          Prep your smoker to 225ºF, and let the smoking commence!
-        </div>
+        <div style={{ paddingBottom: '8px' }}>{`Your time estimated smoking time is ${estTime} hours.`}</div>
+        <div style={{ paddingBottom: '8px' }}>Prep your smoker to 225ºF, and let the smoking commence!</div>
       </div>
-      <div style={{ padding: "8px 0 8px 0" }}>
+      <div style={{ padding: '8px 0 8px 0' }}>
         <Button variant="contained" color="primary" onClick={() => onClose()}>
           Close
         </Button>

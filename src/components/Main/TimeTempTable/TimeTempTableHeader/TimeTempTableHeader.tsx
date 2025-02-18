@@ -1,5 +1,5 @@
-import { TableCell, TableHead, TableRow } from "@mui/material";
-import React from "react";
+import { TableCell, TableHead, TableRow } from '@mui/material';
+import React from 'react';
 
 const TimeTempTableHeader: React.FC = () => {
   return (
