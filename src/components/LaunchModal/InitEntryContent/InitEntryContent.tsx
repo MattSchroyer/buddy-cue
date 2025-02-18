@@ -96,14 +96,28 @@ const InitEntryContent: React.FC<Props> = ({ onSubmit }) => {
           <TimeSelect onChange={onTimeInputChange} />
         </TimeInputContainer>
         <div style={{ padding: '8px' }}>
-          <TextField id="temp-input" label="Temperature" variant="outlined" onChange={(e) => onTempInputChange(e)} />
+          <TextField
+            id="temp-input"
+            label="Temperature"
+            variant="outlined"
+            onChange={onTempInputChange}
+          />
         </div>
         <div style={{ padding: '8px' }}>
-          <TextField id="weight-input" label="Weight" variant="outlined" onChange={(e) => onWeightInputChange(e)} />
+          <TextField
+            id="weight-input"
+            label="Weight"
+            variant="outlined"
+            onChange={onWeightInputChange}
+          />
         </div>
       </LaunchModalInput>
       <div style={{ padding: '8px 0 8px 0' }}>
-        <Button variant="contained" color="primary" onClick={() => onTempButtonClick()}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={onTempButtonClick}
+        >
           Enter
         </Button>
       </div>
