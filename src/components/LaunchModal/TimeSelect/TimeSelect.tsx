@@ -1,7 +1,7 @@
 import React from 'react';
-import { Select, MenuItem } from '@mui/material';
-import { getFormattedTime, getTimeIntervals } from '../../../utils';
 import { Controller } from 'react-hook-form';
+import { MenuItem, Select } from '@mui/material';
+import { getFormattedTime, getTimeIntervals } from '../../../utils';
 
 export type Props = {
   name: string;

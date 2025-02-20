@@ -23,18 +23,14 @@ const LaunchModal: React.FC = () => {
     <InitEntryContent onSubmit={() => setShowEst(true)} />
   );
 
-  const handleClose = (event: {}, reason: "backdropClick" | "escapeKeyDown") => {
+  const handleClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => {
     if (reason && reason == 'backdropClick') return;
 
     setIsOpen(false);
   };
 
   return (
-    <Modal
-      disableEscapeKeyDown
-      open={isOpen}
-      onClose={handleClose}
-    >
+    <Modal disableEscapeKeyDown open={isOpen} onClose={handleClose}>
       <div>{Content}</div>
     </Modal>
   );
