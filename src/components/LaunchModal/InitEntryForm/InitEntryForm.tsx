@@ -51,7 +51,7 @@ export type Props = {
   onSubmit: () => void;
 };
 
-const InitEntryContent: React.FC<Props> = ({ onSubmit }) => {
+const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
   const startTimes = getTimeIntervals();
 
   const {
@@ -149,4 +149,4 @@ const InitEntryContent: React.FC<Props> = ({ onSubmit }) => {
   );
 };
 
-export default InitEntryContent;
+export default InitEntryForm;
