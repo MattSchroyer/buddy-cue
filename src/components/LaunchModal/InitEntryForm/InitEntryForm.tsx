@@ -98,10 +98,7 @@ const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
       <LaunchModalInput>
         <form onSubmit={handleSubmit(onStartSubmit)}>
           <div style={{ padding: '8px' }}>
-            <TimeSelect
-              name='time'
-              control={control}
-            />
+            <TimeSelect name="time" control={control} />
           </div>
           <div style={{ padding: '8px' }}>
             <Controller

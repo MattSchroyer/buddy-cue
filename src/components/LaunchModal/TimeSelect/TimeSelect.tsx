@@ -21,17 +21,7 @@ const TimeSelect: React.FC<Props> = ({ name, control }) => {
     );
   });
 
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <Select {...field}>
-          {MenuItems}
-        </Select>
-      )}
-    />
-  );
+  return <Controller name={name} control={control} render={({ field }) => <Select {...field}>{MenuItems}</Select>} />;
 };
 
 export default TimeSelect;
