@@ -22,7 +22,7 @@ export const getTimeIntervals = (): string[] => {
 
     thisDate.setMinutes(startDate.getMinutes() + 30 * i);
 
-    return thisDate.toString();
+    return thisDate.toISOString();
   });
 
   return startTimes;
