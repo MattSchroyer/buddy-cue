@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { TextField, Button } from '@mui/material';
 import styled from '@emotion/styled';
 import { addTimeTemp, setWeight } from '../../../redux/slices/sessionSlice';
-import { getTimeIntervals, isNumeric } from '../../../utils';
+import { getDefaultStartTime, getTimeIntervals, isNumeric } from '../../../utils';
 import TimeSelect from '../TimeSelect';
 
 const InitEntryContentContainer = styled.div`
@@ -52,7 +52,7 @@ export type Props = {
 };
 
 const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
-  const startTimes = getTimeIntervals();
+  const defaultStartTime = getDefaultStartTime();
 
   const {
     control,
@@ -60,7 +60,7 @@ const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
-      time: startTimes[0],
+      time: defaultStartTime,
       temp: '',
       weight: '',
     },
@@ -74,10 +74,9 @@ const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
     if (!temp || !isNumeric(temp)) return;
     if (!weight || !isNumeric(weight) || Number(weight) < 0) return;
 
-    // TODO: Have the time values in the select already as ISO strings
     const newTimeTemp = {
       temp: Number(temp),
-      time: new Date(time).toISOString(),
+      time,
       addedCoals: true,
     };
 

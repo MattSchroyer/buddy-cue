@@ -9,12 +9,15 @@ export type Props = {
 };
 
 const TimeSelect: React.FC<Props> = ({ name, control }) => {
+  // TODO: Refactor getTimeIntervals to output array of ISO date strings
   const startTimes = getTimeIntervals();
 
   const MenuItems = startTimes.map((dateString: string) => {
+    const value = new Date(dateString).toISOString();
+
     const formattedTime = getFormattedTime(dateString);
     return (
-      <MenuItem key={dateString} value={dateString}>
+      <MenuItem key={dateString} value={value}>
         {formattedTime}
       </MenuItem>
     );
