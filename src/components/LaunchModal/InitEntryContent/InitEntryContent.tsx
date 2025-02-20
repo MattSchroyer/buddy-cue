@@ -1,10 +1,11 @@
 import React from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { TextField, Button, MenuItem, Select } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import styled from '@emotion/styled';
 import { addTimeTemp, setWeight } from '../../../redux/slices/sessionSlice';
-import { getFormattedTime, getTimeIntervals, isNumeric } from '../../../utils';
+import { getTimeIntervals, isNumeric } from '../../../utils';
+import TimeSelect from '../TimeSelect';
 
 const InitEntryContentContainer = styled.div`
   position: absolute;
@@ -29,7 +30,7 @@ const LaunchModalInput = styled.div`
   display: flex;
 `;
 
-type Inputs = {
+export type Inputs = {
   time: string;
   temp: string;
   weight: string;
@@ -67,16 +68,6 @@ const InitEntryContent: React.FC<Props> = ({ onSubmit }) => {
 
   const dispatch = useDispatch();
 
-  // TODO: Re-implement in TimeSelect or similar
-  const MenuItems = startTimes.map((dateString: string) => {
-    const formattedTime = getFormattedTime(dateString);
-    return (
-      <MenuItem key={dateString} value={dateString}>
-        {formattedTime}
-      </MenuItem>
-    );
-  });
-
   const onStartSubmit: SubmitHandler<Inputs> = (data) => {
     const { temp, weight, time } = data;
 
@@ -108,7 +99,10 @@ const InitEntryContent: React.FC<Props> = ({ onSubmit }) => {
       <LaunchModalInput>
         <form onSubmit={handleSubmit(onStartSubmit)}>
           <div style={{ padding: '8px' }}>
-            <Controller name="time" control={control} render={({ field }) => <Select {...field}>{MenuItems}</Select>} />
+            <TimeSelect
+              name='time'
+              control={control}
+            />
           </div>
           <div style={{ padding: '8px' }}>
             <Controller
