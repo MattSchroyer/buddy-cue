@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Select, MenuItem } from '@mui/material';
 import { getFormattedTime, getTimeIntervals } from '../../../utils';
 
+// TODO: Import of component was removed as part of RHF, need to re-implement
 export type OnDateChangeType = React.ChangeEvent<{
   name?: string | undefined;
   value: string;

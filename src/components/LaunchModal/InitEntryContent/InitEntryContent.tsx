@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, MenuItem, Select } from '@mui/material';
 import styled from '@emotion/styled';
-import TimeSelect from '../TimeSelect/TimeSelect';
 import { addTimeTemp, setWeight } from '../../../redux/slices/sessionSlice';
-import { getDefaultStartTime } from '../../../utils';
+import { getFormattedTime, getTimeIntervals, isNumeric } from '../../../utils';
 
 const InitEntryContentContainer = styled.div`
   position: absolute;
@@ -29,6 +29,12 @@ const LaunchModalInput = styled.div`
   display: flex;
 `;
 
+type Inputs = {
+  time: string;
+  temp: string;
+  weight: string;
+};
+
 export type OnChangeEventType = {
   target: {
     value: string;
@@ -45,39 +51,53 @@ export type Props = {
 };
 
 const InitEntryContent: React.FC<Props> = ({ onSubmit }) => {
-  const startTime = getDefaultStartTime();
+  const startTimes = getTimeIntervals();
 
-  const [time, setTime] = useState<string>(startTime);
-  const [temp, setTemp] = useState<number>(0);
-  const [thisWeight, setThisWeight] = useState<number>(0);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({
+    defaultValues: {
+      time: startTimes[0],
+      temp: '',
+      weight: '',
+    },
+  });
 
   const dispatch = useDispatch();
 
-  const onTimeInputChange = (thisTime: string) => {
-    setTime(thisTime);
-  };
+  // TODO: Re-implement in TimeSelect or similar
+  const MenuItems = startTimes.map((dateString: string) => {
+    const formattedTime = getFormattedTime(dateString);
+    return (
+      <MenuItem key={dateString} value={dateString}>
+        {formattedTime}
+      </MenuItem>
+    );
+  });
 
-  const onTempInputChange = (e: OnChangeEventType) => {
-    setTemp(parseInt(e.target.value, 10));
-  };
+  const onStartSubmit: SubmitHandler<Inputs> = (data) => {
+    const { temp, weight, time } = data;
 
-  const onWeightInputChange = (e: OnChangeEventType) => {
-    setThisWeight(parseInt(e.target.value, 10));
-  };
+    if (!temp || !isNumeric(temp)) return;
+    if (!weight || !isNumeric(weight) || Number(weight) < 0) return;
 
-  const onTempButtonClick = () => {
+    // TODO: Have the time values in the select already as ISO strings
     const newTimeTemp = {
-      temp,
-      time,
+      temp: Number(temp),
+      time: new Date(time).toISOString(),
       addedCoals: true,
     };
 
     dispatch(addTimeTemp(newTimeTemp));
-
-    dispatch(setWeight(thisWeight));
+    dispatch(setWeight(Number(weight)));
 
     onSubmit();
   };
+
+  const tempErrorMessage = `Please enter a valid temperature`;
+  const weightErrorMessage = `Please enter a valid weight`;
 
   return (
     <InitEntryContentContainer>
@@ -86,34 +106,47 @@ const InitEntryContent: React.FC<Props> = ({ onSubmit }) => {
         <div>Please select a starting time, temp (in ºF), and weight (in lbs).</div>
       </LaunchModalHeader>
       <LaunchModalInput>
-        <form>
+        <form onSubmit={handleSubmit(onStartSubmit)}>
           <div style={{ padding: '8px' }}>
-            <TimeSelect onChange={onTimeInputChange} />
+            <Controller name="time" control={control} render={({ field }) => <Select {...field}>{MenuItems}</Select>} />
           </div>
           <div style={{ padding: '8px' }}>
-            <TextField
-              id="temp-input"
-              label="Temperature"
-              variant="outlined"
-              onChange={onTempInputChange}
+            <Controller
+              name="temp"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="temp-input"
+                  label="Temperature"
+                  variant="outlined"
+                  error={!!errors.temp}
+                  helperText={errors.temp && tempErrorMessage}
+                />
+              )}
             />
           </div>
           <div style={{ padding: '8px' }}>
-            <TextField
-              id="weight-input"
-              label="Weight"
-              variant="outlined"
-              onChange={onWeightInputChange}
+            <Controller
+              name="weight"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="weight-input"
+                  label="Weight"
+                  variant="outlined"
+                  error={!!errors.weight}
+                  helperText={errors.weight && weightErrorMessage}
+                />
+              )}
             />
           </div>
           <div style={{ padding: '8px' }}>
-            <Button
-              color="primary"
-              type="submit"
-              variant="contained"
-              onClick={onTempButtonClick}
-            >
-              Enter
+            <Button color="primary" type="submit" variant="contained">
+              START SMOKING
             </Button>
           </div>
         </form>

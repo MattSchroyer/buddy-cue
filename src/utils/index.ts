@@ -28,6 +28,10 @@ export const getTimeIntervals = (): string[] => {
   return startTimes;
 };
 
+export const isNumeric = (value: string): boolean => {
+  return !isNaN(Number(value));
+};
+
 export const isTempWarning = (
   timeTempCache: TimeTempType[],
   weight: number,
