@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from '@mui/material';
-import InitEntryContent from './InitEntryContent/';
+import InitEntryForm from './InitEntryForm';
 import InitEstContent from './InitEstContent/';
 
 export type OnChangeEventType = {
@@ -20,11 +20,17 @@ const LaunchModal: React.FC = () => {
   const Content = showEst ? (
     <InitEstContent onClose={() => setIsOpen(false)} />
   ) : (
-    <InitEntryContent onSubmit={() => setShowEst(true)} />
+    <InitEntryForm onSubmit={() => setShowEst(true)} />
   );
 
+  const handleClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => {
+    if (reason && reason == 'backdropClick') return;
+
+    setIsOpen(false);
+  };
+
   return (
-    <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+    <Modal disableEscapeKeyDown open={isOpen} onClose={handleClose}>
       <div>{Content}</div>
     </Modal>
   );

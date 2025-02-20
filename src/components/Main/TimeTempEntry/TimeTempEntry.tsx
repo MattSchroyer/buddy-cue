@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { addTimeTemp } from '../../../redux/slices/sessionSlice';
 import { RootState } from '../../../redux/store';
-import { getDefaultStartDate, getFormattedTime, getTimeIntervals } from '../../../utils';
+import { getFormattedTime, getTimeIntervals } from '../../../utils';
 
 export type OnCoalsChangeType = React.ChangeEvent<{
   name?: string | undefined;

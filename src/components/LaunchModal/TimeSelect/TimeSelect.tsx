@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
-import { Select, MenuItem } from '@mui/material';
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { MenuItem, Select } from '@mui/material';
 import { getFormattedTime, getTimeIntervals } from '../../../utils';
 
-export type OnDateChangeType = React.ChangeEvent<{
-  name?: string | undefined;
-  value: string;
-}>;
-
 export type Props = {
-  onChange: (dateString: string) => void;
+  name: string;
+  control: any;
 };
 
-const TimeSelect: React.FC<Props> = ({ onChange }) => {
+const TimeSelect: React.FC<Props> = ({ name, control }) => {
   const startTimes = getTimeIntervals();
-  const [thisTimeString, setThisTimeString] = useState<string | undefined>(startTimes[0]);
 
+  // TODO: Make own component in own file
   const MenuItems = startTimes.map((dateString: string) => {
     const formattedTime = getFormattedTime(dateString);
+
     return (
       <MenuItem key={dateString} value={dateString}>
         {formattedTime}
@@ -24,22 +22,7 @@ const TimeSelect: React.FC<Props> = ({ onChange }) => {
     );
   });
 
-  const onTimeChange = (e: OnDateChangeType) => {
-    const thisDateString = e.target.value;
-    onChange(thisDateString);
-    setThisTimeString(thisDateString);
-  };
-
-  return (
-    <Select
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      onChange={(e) => onTimeChange(e)}
-      value={thisTimeString}
-    >
-      {MenuItems}
-    </Select>
-  );
+  return <Controller name={name} control={control} render={({ field }) => <Select {...field}>{MenuItems}</Select>} />;
 };
 
 export default TimeSelect;
