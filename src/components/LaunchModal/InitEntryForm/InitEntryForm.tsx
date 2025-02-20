@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { TextField, Button } from '@mui/material';
 import styled from '@emotion/styled';
 import { addTimeTemp, setWeight } from '../../../redux/slices/sessionSlice';
-import { getDefaultStartTime, getTimeIntervals, isNumeric } from '../../../utils';
+import { getDefaultStartTime, isNumeric } from '../../../utils';
 import TimeSelect from '../TimeSelect';
 
 const InitEntryContentContainer = styled.div`
