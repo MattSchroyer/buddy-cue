@@ -11,6 +11,7 @@ export type Props = {
 const TimeSelect: React.FC<Props> = ({ name, control }) => {
   const startTimes = getTimeIntervals();
 
+  // TODO: Make own component in own file
   const MenuItems = startTimes.map((dateString: string) => {
     const formattedTime = getFormattedTime(dateString);
 
