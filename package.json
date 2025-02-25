@@ -34,7 +34,7 @@
     "predeploy": "npm run build",
     "serve": "vite preview",
     "start": "vite",
-    "test": "vitest"
+    "test": "vitest --disable-console-intercept"
   },
   "browserslist": {
     "production": [
