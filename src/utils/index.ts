@@ -40,13 +40,24 @@ export const isTempWarning = (
 ): boolean => {
   if (timeTempCache.length < 2) return false;
 
+  // Find the average temp increase so far in the session (30 min intervals)
   const initTemp = timeTempCache[0].temp;
   const lastTimeTempEntry = timeTempCache.slice(-1).pop();
   const lastTemp = lastTimeTempEntry ? lastTimeTempEntry.temp : 0;
-  const avgTempInc = lastTemp - initTemp;
-  const reqAvgTempInc = (goalTemp - initTemp) / (weight * hoursPerLb);
+  const tempInc = (lastTemp - initTemp);
+  const avgTempInc = tempInc / timeTempCache.length;
 
-  return avgTempInc < reqAvgTempInc;
+  /*
+  * This calculation assumes that temperature should rise linearly
+  * to match the time estimated to reach the goal temp.
+  * This should be revisited, because internal meat temperature does
+  * NOT rise linearly (e.g., the "stall temp")
+  */
+  const estTimeIntervals = (weight * hoursPerLb) * 2;
+  const reqTempInc = goalTemp - initTemp;
+  const reqIntervalTempIncrease = reqTempInc / estTimeIntervals;
+
+  return avgTempInc < reqIntervalTempIncrease;
 };
 
 export const getFormattedTime = (time: string) => {
