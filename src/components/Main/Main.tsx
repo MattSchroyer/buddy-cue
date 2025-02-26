@@ -3,10 +3,11 @@ import TempWarningModal from './TempWarningModal';
 import TimeTempChart from './TimeTempChart';
 import TimeTempEntry from './TimeTempEntry';
 import TimeTempTable from './TimeTempTable';
+import testId from './testid';
 
 const Main: React.FC = () => {
   return (
-    <>
+    <div data-testid={testId('root')}>
       <TempWarningModal />
       <div style={{ padding: '12px' }}>
         <TimeTempEntry />
@@ -17,7 +18,7 @@ const Main: React.FC = () => {
       <div style={{ padding: '12px' }}>
         <TimeTempTable />
       </div>
-    </>
+    </ div>
   );
 };
 

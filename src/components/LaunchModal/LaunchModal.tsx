@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '@mui/material';
 import InitEntryForm from './InitEntryForm';
 import InitEstContent from './InitEstContent/';
+import testid from './testid';
 
 export type OnChangeEventType = {
   target: {
@@ -30,7 +31,7 @@ const LaunchModal: React.FC = () => {
   };
 
   return (
-    <Modal disableEscapeKeyDown open={isOpen} onClose={handleClose}>
+    <Modal disableEscapeKeyDown open={isOpen} onClose={handleClose} data-testid={testid('root')}>
       <div>{Content}</div>
     </Modal>
   );
