@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { addTimeTemp, setWeight } from '../../../redux/slices/sessionSlice';
 import { getDefaultStartTime, isNumeric } from '../../../utils';
 import TimeSelect from '../TimeSelect';
+import testId from './testid';
 
 const InitEntryContentContainer = styled.div`
   position: absolute;
@@ -90,13 +91,13 @@ const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
   const weightErrorMessage = `Please enter a valid weight`;
 
   return (
-    <InitEntryContentContainer>
+    <InitEntryContentContainer data-testid={testId('root')}>
       <LaunchModalHeader>
         <h1>Welcome to Buddy Cue!</h1>
         <div>Please select a starting time, temp (in ºF), and weight (in lbs).</div>
       </LaunchModalHeader>
       <LaunchModalInput>
-        <form onSubmit={handleSubmit(onStartSubmit)}>
+        <form onSubmit={handleSubmit(onStartSubmit)} data-testid={testId('form')}>
           <div style={{ padding: '8px' }}>
             <TimeSelect name="time" control={control} />
           </div>
@@ -108,7 +109,8 @@ const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  id="temp-input"
+                  slotProps={{htmlInput: {"data-testid": testId('input-temp')}}}
+                  id="input-temp"
                   label="Temperature"
                   variant="outlined"
                   error={!!errors.temp}
@@ -125,7 +127,8 @@ const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  id="weight-input"
+                  slotProps={{htmlInput: {"data-testid": testId('input-weight')}}}
+                  id="input-weight"
                   label="Weight"
                   variant="outlined"
                   error={!!errors.weight}
@@ -135,7 +138,12 @@ const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
             />
           </div>
           <div style={{ padding: '8px' }}>
-            <Button color="primary" type="submit" variant="contained">
+            <Button
+              data-testid={testId('button-submit')}
+              color="primary"
+              type="submit"
+              variant="contained"
+            >
               START SMOKING
             </Button>
           </div>
