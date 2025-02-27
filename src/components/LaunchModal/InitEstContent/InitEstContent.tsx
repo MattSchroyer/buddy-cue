@@ -1,9 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Button } from '@mui/material';
 import styled from '@emotion/styled';
+import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { HOURS_PER_LB } from '../../../constants';
 import { RootState } from '../../../redux/store';
+import testId from './testid';
 
 const InitEstContentContainer = styled.div`
   position: absolute;
@@ -26,7 +27,7 @@ const InitEstContent: React.FC<Props> = ({ onClose }) => {
   const estTime = weight * HOURS_PER_LB;
 
   return (
-    <InitEstContentContainer>
+    <InitEstContentContainer data-testid={testId('root')}>
       <div style={{ padding: '8px 0 8px 0' }}>
         <h1>Excellent.</h1>
         <div style={{ paddingBottom: '8px' }}>{`Your time estimated smoking time is ${estTime} hours.`}</div>
