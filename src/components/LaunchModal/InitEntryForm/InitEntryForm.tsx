@@ -72,6 +72,7 @@ const InitEntryForm: React.FC<Props> = ({ onSubmit }) => {
   const onStartSubmit: SubmitHandler<Inputs> = (data) => {
     const { temp, weight, time } = data;
 
+    // TODO: these are error conditions, but need to add helper text and error state
     if (!temp || !isNumeric(temp)) return;
     if (!weight || !isNumeric(weight) || Number(weight) < 0) return;
 
