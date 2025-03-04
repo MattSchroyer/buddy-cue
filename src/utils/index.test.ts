@@ -7,8 +7,12 @@ import {
   isTempWarning,
   getFormattedTime,
   getFormattedTimeTemp,
+  getEstTime,
+  getEstTimeMessage,
+  getSmokerPrepMessage,
 } from './index';
 import { TimeTempType } from '../redux/slices/sessionSlice';
+import { HOURS_PER_LB } from '../constants';
 
 describe('utils', () => {
   test('getDefaultStartDate should return a date with hours set to 6:00 AM', () => {
@@ -27,6 +31,28 @@ describe('utils', () => {
     const defaultStartTime = getDefaultStartTime();
     expect(typeof defaultStartTime).toBe('string');
     expect(defaultStartTime).toBe(startDateIsoString);
+  });
+
+  test('getTimeIntervals should return weight times hours per pound', () => {
+    const mockedWeight = 5;
+    const mockedHoursPerLb = HOURS_PER_LB;
+    const mockedEstTime = mockedWeight * mockedHoursPerLb;
+
+    expect(getEstTime(mockedWeight, mockedHoursPerLb)).toBe(mockedEstTime);
+  });
+
+  test('getEstTimeMessage should return a formatted message with the estimated time', () => {
+    const estTime = 10;
+    const message = getEstTimeMessage(estTime);
+    
+    expect(message).toBe(`Your estimated smoking time is ${estTime} hours.`);
+  });
+
+  test('getSmokerPrepMessage should return a formatted message with the smoker temperature', () => {
+    const smokerTemp = 225;
+    const message = getSmokerPrepMessage(smokerTemp);
+    
+    expect(message).toBe(`Prep your smoker to ${smokerTemp}ºF, and let the smoking commence!`);
   });
 
   describe('getTimeIntervals', () => {

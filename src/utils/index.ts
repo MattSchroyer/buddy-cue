@@ -14,6 +14,18 @@ export const getDefaultStartTime = (): string => {
   return defaultStartDate.toISOString();
 };
 
+export const getEstTime = (weight: number, hoursPerLb: number) => {
+  return weight * hoursPerLb;
+};
+
+export const getEstTimeMessage = (estTime: number) => {
+  return `Your estimated smoking time is ${estTime} hours.`;
+};
+
+export const getSmokerPrepMessage = (smokerTemp: number) => {
+  return `Prep your smoker to ${smokerTemp}ºF, and let the smoking commence!`;
+};
+
 export const getTimeIntervals = (): string[] => {
   const startDate = getDefaultStartDate();
 
